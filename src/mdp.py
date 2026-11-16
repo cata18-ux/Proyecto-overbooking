@@ -29,7 +29,7 @@ def prob_binomial(n, k, p): #probabilidad de que k en n eventos ocurran, cada un
 def reservas_al_decidir(n_bajas, n_altas, solicitud, accion):  #reservas que se mantienen despues de aceptar o rechazar la solicitud
     if accion == ACEPTAR and n_bajas + n_altas < MAX_RESERVAS:
         if solicitud == BAJA:
-            n_bajas + 1
+            n_bajas += 1
         elif solicitud == ALTA:
             n_altas +=1
     return n_bajas, n_altas
@@ -55,7 +55,7 @@ def recompensa_final_esperada(n_bajas, n_altas):  #recompensa promedio de quien 
     for llegadas_bajas in range(n_bajas + 1):
         p_bajas = prob_binomial(n_bajas, llegadas_bajas, PROB_APARECER)
         for llegadas_altas in range(n_altas + 1):
-            p_altas = prob_binomial(n_altas, llegadas_bajas, PROB_APARECER)
+            p_altas = prob_binomial(n_altas, llegadas_altas, PROB_APARECER)
             total += p_bajas * p_altas * recompensa_final(llegadas_bajas, llegadas_altas)
     return total
 
